@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Carros</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+
+  <body>
+
+    {%- block topbar -%}
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Terra Tv Car</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Carros</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {%- endblock -%}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% block page_header %}{% endblock %}
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+      <hr>
+
+      <footer>
+        <p>&copy; Terra Tv 2014</p>
+      </footer>
+    </div>
+    {% block js_footer %}
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+  </body>
+</html>
