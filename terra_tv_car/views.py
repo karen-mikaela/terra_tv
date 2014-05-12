@@ -7,9 +7,17 @@ from terra_tv_car.models import Car
 cars = Blueprint('cars', __name__, template_folder='templates')
 
 class ListView(MethodView):
-    def get(self):
-        cars = Car.objects.all()
-        return render_template('cars/list.html', cars=cars)
+
+    def get(self, slug):
+        if slug:
+            car = Car.objects.get_or_404(slug=slug)
+            print vars(car)
+            if car:
+                car.delete()
+            return redirect(url_for('cars.list'))
+        else:
+            cars = Car.objects.all()
+            return render_template('cars/list.html', cars=cars)
 
 
 class DetailView(MethodView):
@@ -57,6 +65,7 @@ class DetailView(MethodView):
 
 
 # Register the urls
-cars.add_url_rule('/', view_func=ListView.as_view('list'))
+cars.add_url_rule('/', defaults={'slug': None}, view_func=ListView.as_view('list'))
+cars.add_url_rule('/delete/<slug>/', view_func=ListView.as_view('delete'))
 cars.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
 cars.add_url_rule('/create/', defaults={'slug': None}, view_func=DetailView.as_view('create'))
