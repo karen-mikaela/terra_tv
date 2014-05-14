@@ -3,4 +3,7 @@
 .DS_Store*
 
 #env
-cars
+cars/bin
+cars/include
+cars/lib
+cars/.Python
