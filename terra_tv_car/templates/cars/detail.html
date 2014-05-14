@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+  <div class="page-header">
+    <h2>
+    {% if create %}
+      Novo Carro
+    {% else %}
+      Editar Carro
+    {% endif %}
+    </h2>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <form action="." method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-md-2 col-md-offset-0 control-label"
+              for="model">Modelo</label>
+          <div class="col-md-6">
+            <input id="model" name="model"
+                class="form-control input-md"
+                type="text" maxlength="100"
+                value = {% if not create %} "{{car.model}}" {% endif %} >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 col-md-offset-0 control-label"
+              for="manufacturer">Fabricante</label>
+          <div class="col-md-6">
+            <input id="manufacturer" name="manufacturer"
+                class="form-control input-md"
+                type="text" maxlength="100"
+                value = {% if not create %} "{{car.manufacturer}}" {% endif %} >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 col-md-offset-0 control-label"
+              for="year">Ano</label>
+          <div class="col-md-6">
+            <input id="year" name="year"
+                class="form-control input-md"
+                type="text" maxlength="4"
+                value = {% if not create %} "{{car.year}}" {% endif %} >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 col-md-offset-0 control-label"
+              for="photo">Foto</label>
+          <div class="col-md-6">
+            <input id="photo" name="photo"
+                class="form-control input-md"
+                type="file">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <span class="col-md-2 col-md-offset-0 "></span>
+          <div class="col-md-4">
+            <input type="submit" class="btn btn-primary" value="Salvar">
+            {% if create %}
+            <button id="reset" name="reset"
+                class="btn btn-info" type="reset">Limpar</button>
+            {% else %}
+            <a href="{{ url_for('cars.list') }}" class="btn btn-default">Cancelar</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  {% if not create %}
+  <div class="col-md-6">
+    <img height ="500" class="photo-car" alt="{{car.photo}}"
+        src="{{ car.get_photo_url() }}" />
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}
