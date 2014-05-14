@@ -7,3 +7,5 @@ cars/bin
 cars/include
 cars/lib
 cars/.Python
+photos*
+!photo/info.txt

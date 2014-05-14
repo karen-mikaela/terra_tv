@@ -13,13 +13,16 @@ app.config["MONGODB_SETTINGS"] = {'DB': "terra_car"}
 app.config["SECRET_KEY"] = "mys3cr3t3k3y"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config["USERNAME"] = "admin"
+app.config["PASSWORD"] = "admin"
 
 db = MongoEngine(app)
 
 def register_blueprints(app):
     from terra_tv_car.views import cars
     app.register_blueprint(cars)
-
+    from terra_tv_car.views import admin
+    app.register_blueprint(admin)
 register_blueprints(app)
 
 if __name__ == '__main__':
