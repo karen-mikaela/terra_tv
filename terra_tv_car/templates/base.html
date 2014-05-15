@@ -30,6 +30,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if session.logged_in %}
+              <li><span class= "wellcome">Olá {{session['username']}}</span></li>
               <li><a href="{{ url_for('admin.logout') }}">Logout</a></li>
             {% else %}
               <li {% if tab_active == 'login' %} class="active" {% endif %} >

@@ -16,3 +16,8 @@ input#photo{
     margin-bottom: 10px;
     margin-top: 20px;
 }
+span.wellcome{
+    color: #fff;
+    display: block;
+    padding: 15px;
+}

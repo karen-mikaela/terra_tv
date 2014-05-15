@@ -26,6 +26,7 @@ class AuthView(MethodView):
             error = 'Invalid password'
         else:
             session['logged_in'] = True
+            session['username'] = request.form['username']
             return redirect(url_for('admin.list'))
         if error:
             return redirect(url_for('admin.login'))
@@ -36,6 +37,7 @@ class AuthView(MethodView):
             return render_template('admin/login.html', error=error, tab_active="login" )
         else:
             session.pop('logged_in', None)
+            session.pop('username', None)
             return redirect(url_for('admin.list'))
 
 
@@ -80,7 +82,7 @@ class DetailView(MethodView):
 
     def get(self,id):
         if not session.get('logged_in'):
-            abort(401)
+            return redirect(url_for('admin.login'))
         if id:
             car = Car.objects.get_or_404(id=id)
         else:
@@ -97,7 +99,7 @@ class DetailView(MethodView):
 
     def post(self, id):
         if not session.get('logged_in'):
-            abort(401)
+            return redirect(url_for('admin.login'))
         model = request.form['model']
         year = request.form['year']
         manufacturer = request.form['manufacturer']
