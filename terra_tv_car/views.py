@@ -127,7 +127,21 @@ class DetailView(MethodView):
 class SearchView(MethodView):
 
     def post(self):
-        abort(404)
+        model = request.form['model']
+        manufacturer = request.form['manufacturer']
+        year = request.form['year']
+
+        query = dict()
+        if model:
+            query['model'] = model
+        if manufacturer:
+            query['manufacturer'] = manufacturer
+        if year:
+            query['year'] = year
+
+        cars = Car.objects(**query)
+
+        return render_template('cars/search.html', cars=cars, tab_active= "car")
 
     def get(self):
         cars = Car.objects.all()
@@ -143,5 +157,6 @@ admin.add_url_rule('/admin/car/<id>/', view_func=DetailView.as_view('detail'))
 admin.add_url_rule('/admin/create/', defaults={'id': None}, view_func=DetailView.as_view('create'))
 cars.add_url_rule('/', view_func=SearchView.as_view('search'))
 cars.add_url_rule('/photo/<filename>/', 'photos', view_func=uploaded_file_name)
+cars.add_url_rule('/search/', view_func=SearchView.as_view('result'))
 
 
