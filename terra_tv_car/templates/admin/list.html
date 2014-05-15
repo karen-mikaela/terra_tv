@@ -8,7 +8,7 @@
             <h1>Carros</h1>
         </div>
         <div class="col-md-3 btn-new">
-            <a href="{{ url_for('cars.create') }}" class="btn btn-primary"
+            <a href="{{ url_for('admin.create') }}" class="btn btn-primary"
                     role="button">Novo Carro</a>
 
         </div>
@@ -36,10 +36,10 @@
                 <td>{{ car.manufacturer }}</td>
                 <td>{{ car.year }}</td>
                 <td>
-                    <a href="{{ url_for('cars.detail', id=car.id) }}"
+                    <a href="{{ url_for('admin.detail', id=car.id) }}"
                             class="btn  btn-sm btn-info"
                             role="button">Editar</a>
-                    <a href="{{ url_for('cars.delete', id=car.id) }}"
+                    <a href="{{ url_for('admin.delete', id=car.id) }}"
                             class="btn  btn-sm btn-danger"
                             role="button">Eliminar</a>
                 </td>

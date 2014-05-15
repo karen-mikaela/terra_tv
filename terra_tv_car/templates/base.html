@@ -23,7 +23,7 @@
             </li>
             {% if session.logged_in %}
               <li {% if tab_active == 'admin' %} class="active" {% endif %}>
-                <a href="{{ url_for('cars.list') }}">ADM</a>
+                <a href="{{ url_for('admin.list') }}">ADM</a>
               </li>
             {% endif %}
 

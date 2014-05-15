@@ -2,12 +2,49 @@
 
 {% block content %}
 
+
+
 <div class="col-md-6">
-    <div class="row">
-        <div class="col-md-9">
-            <h1>Carros</h1>
+    <h1>Busca</h1>
+    <form action="" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="col-md-6">
+                <input id="model" name="model"
+                        class="form-control input-md"
+                        type="text" maxlength="100"
+                        placeholder= "Insira um modelo">
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <input id="manufacturer" name="manufacturer"
+                        class="form-control input-md"
+                        type="text" maxlength="100"
+                        placeholder= "Insira um Fabricante">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <input id="year" name="year"
+                        class="form-control input-md"
+                        type="text" maxlength="100"
+                        placeholder= "Insira um Ano">
+                </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4">
+            <input type="submit" class="btn btn-primary" value="Buscar">
+            <button id="reset" name="reset"
+                    class="btn btn-info" type="reset">Limpar</button>
+          </div>
+        </div>
+
+      </form>
+</div>
+
+<div class="col-md-6">
 
     {% if cars %}
     <table class="table table-striped table-bordered">

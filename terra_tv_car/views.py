@@ -1,4 +1,4 @@
-from flask import  Blueprint, request, redirect, render_template, url_for, flash, session, g, abort
+from flask import  Blueprint, request, redirect, render_template, url_for, session, g, abort
 from flask.views import MethodView
 from flask import send_from_directory
 
@@ -26,8 +26,7 @@ class AuthView(MethodView):
             error = 'Invalid password'
         else:
             session['logged_in'] = True
-            flash('You were logged in')
-            return redirect(url_for('cars.list'))
+            return redirect(url_for('admin.list'))
         if error:
             return redirect(url_for('admin.login'))
 
@@ -37,8 +36,7 @@ class AuthView(MethodView):
             return render_template('admin/login.html', error=error, tab_active="login" )
         else:
             session.pop('logged_in', None)
-            flash('You were logged out')
-            return redirect(url_for('cars.list'))
+            return redirect(url_for('admin.list'))
 
 
 class ListView(MethodView):
@@ -54,11 +52,10 @@ class ListView(MethodView):
                 except:
                     pass
                 car.delete()
-                flash('foi deletado')
-            return redirect(url_for('cars.list'))
+            return redirect(url_for('admin.list'))
         else:
             cars = Car.objects.all()
-            return render_template('cars/list.html', cars=cars, tab_active= "admin")
+            return render_template('admin/list.html', cars=cars, tab_active= "admin")
 
 
 class DetailView(MethodView):
@@ -95,7 +92,7 @@ class DetailView(MethodView):
             "tab_active" : "admin"
         }
 
-        return render_template('cars/detail.html',**context)
+        return render_template('admin/detail.html',**context)
 
 
     def post(self, id):
@@ -125,7 +122,7 @@ class DetailView(MethodView):
             car = Car(model=model, year=year, photo=photo_name, manufacturer=manufacturer)
         car.save()
 
-        return redirect(url_for('cars.list'))
+        return redirect(url_for('admin.list'))
 
 class SearchView(MethodView):
 
@@ -140,9 +137,11 @@ class SearchView(MethodView):
 
 admin.add_url_rule('/login/', defaults={'_session': "new"},view_func=AuthView.as_view('login'))
 admin.add_url_rule('/logout/', defaults={'_session': None}, view_func=AuthView.as_view('logout'))
-cars.add_url_rule('/admin/', defaults={'id': None}, view_func=ListView.as_view('list'))
-cars.add_url_rule('/admin/delete/<id>/', view_func=ListView.as_view('delete'))
-cars.add_url_rule('/admin/car/<id>/', view_func=DetailView.as_view('detail'))
-cars.add_url_rule('/photo/<filename>/', 'photos', view_func=uploaded_file_name)
-cars.add_url_rule('/admin/create/', defaults={'id': None}, view_func=DetailView.as_view('create'))
+admin.add_url_rule('/admin/', defaults={'id': None}, view_func=ListView.as_view('list'))
+admin.add_url_rule('/admin/delete/<id>/', view_func=ListView.as_view('delete'))
+admin.add_url_rule('/admin/car/<id>/', view_func=DetailView.as_view('detail'))
+admin.add_url_rule('/admin/create/', defaults={'id': None}, view_func=DetailView.as_view('create'))
 cars.add_url_rule('/', view_func=SearchView.as_view('search'))
+cars.add_url_rule('/photo/<filename>/', 'photos', view_func=uploaded_file_name)
+
+
