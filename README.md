@@ -9,11 +9,16 @@ Installation
 
   1. Install [pip](http://www.pip-installer.org/en/latest/installing.html)
   2. Make a [virtualenv](http://docs.python-guide.org/en/latest/starting/install/osx/) for this project
-    $ virtualenv venv
+
+$  virtualenv venv
+    
   3. Activate venv
-    $ . venv/bin/activate
+
+$ . venv/bin/activate
+
   4. Install the required dependencies:
-    $ pip install -r requirements.txt
+
+$   pip install -r requirements.txt
 
 Run the terra_tv:
 
