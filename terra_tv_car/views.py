@@ -140,7 +140,7 @@ class DetailView(MethodView):
                 }
             return render_template('admin/detail.html',**context)
 
-        if not photo:
+        if not photo and not id:
             context = {
                 "car": Car(),
                 "create": True,

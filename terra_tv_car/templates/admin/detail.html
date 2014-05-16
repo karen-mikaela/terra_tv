@@ -64,7 +64,9 @@
           <div class="col-md-6">
             <input id="photo" name="photo"
                 class="form-control input-md"
+                {% if create %}
                 required
+                {% endif %}
                 type="file">
           </div>
         </div>
@@ -89,7 +91,7 @@
   </div>
   {% if not create %}
   <div class="col-md-6">
-    <img height ="500" class="photo-car" alt="{{car.photo}}"
+    <img height ="500"  class="photo-car" alt="{{car.photo}}"
         src="{{ car.get_photo_url() }}" />
   </div>
   {% endif %}
