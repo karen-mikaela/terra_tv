@@ -21,6 +21,9 @@ Run the terra_tv:
 
 Goto: [http://localhost:5001](http://localhost:5001)
 
+Use this credentials to login :
+urs: admin , passwd: admin
+
 Run testes:
 ````
     python tests/terra_tv_car_tests.py
