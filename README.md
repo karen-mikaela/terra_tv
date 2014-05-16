@@ -8,8 +8,12 @@ Installation
 ------------
 
   1. Install [pip](http://www.pip-installer.org/en/latest/installing.html)
-  2. Make a [virtualenv](http://virtualenvwrapper.readthedocs.org/en/latest/#introduction) for this project
-  3. Install the required dependencies: 'pip install -r requirements.txt
+  2. Make a [virtualenv](http://docs.python-guide.org/en/latest/starting/install/osx/) for this project
+    $ virtualenv venv
+  3. Activate venv
+    $ . venv/bin/activate
+  4. Install the required dependencies:
+    $ pip install -r requirements.txt
 
 Run the terra_tv:
 
@@ -17,6 +21,8 @@ Run the terra_tv:
 
 Goto: [http://localhost:5001](http://localhost:5001)
 
+Run testes:
+    python tests/terra_tv_car_tests.py
 
 Todos
 ------
