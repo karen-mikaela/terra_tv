@@ -9,3 +9,4 @@ cars/lib
 cars/.Python
 photos*
 !photo/info.txt
+!photo/test.jpg

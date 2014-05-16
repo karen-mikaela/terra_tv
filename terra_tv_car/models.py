@@ -6,7 +6,7 @@ from terra_tv_car import db
 class Car(db.Document):
     year = db.StringField(max_length=4, required=True)
     model = db.StringField(max_length=100, required=True)
-    manufacturer  = db.StringField(max_length=10, required=True)
+    manufacturer  = db.StringField(max_length=100, required=True)
     photo  = db.StringField(max_length=100, required=True)
 
     def __unicode__(self):

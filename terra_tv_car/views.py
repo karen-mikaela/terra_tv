@@ -1,7 +1,6 @@
-from flask import  Blueprint, request, redirect, render_template, url_for, session, g, abort
+from flask import  Blueprint, request, redirect, render_template, url_for, session, g, abort,jsonify
 from flask.views import MethodView
 from flask import send_from_directory
-
 
 from werkzeug.utils import secure_filename
 from terra_tv_car.models import Car
@@ -123,8 +122,9 @@ class DetailView(MethodView):
         else:
             car = Car(model=model, year=year, photo=photo_name, manufacturer=manufacturer)
         car.save()
+        return jsonify(success=True, id= str(car.id))
 
-        return redirect(url_for('admin.list'))
+        #return redirect(url_for('admin.list'))
 
 class SearchView(MethodView):
 
