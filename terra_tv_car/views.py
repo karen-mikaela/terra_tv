@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import  Blueprint, request, redirect, render_template, url_for, session, g, abort,jsonify
 from flask.views import MethodView
 from flask import send_from_directory
@@ -90,7 +91,9 @@ class DetailView(MethodView):
         context = {
             "car": car,
             "create": id is None,
-            "tab_active" : "admin"
+            "tab_active" : "admin",
+            "alert": "",
+            "status": 0
         }
 
         return render_template('admin/detail.html',**context)
@@ -103,6 +106,47 @@ class DetailView(MethodView):
         year = request.form['year']
         manufacturer = request.form['manufacturer']
         photo = request.files['photo']
+
+        if not model:
+            context = {
+                "car": Car(),
+                "create": True,
+                "tab_active" : "admin",
+                "alert": u"O campo modelo é requerido.",
+                "status": -1
+                }
+            return render_template('admin/detail.html',**context)
+
+        if not manufacturer:
+            context = {
+                "car": Car(),
+                "create": True,
+                "tab_active" : "admin",
+                "alert": u"O campo fabricante é requerido.",
+                "status": -1
+                }
+            return render_template('admin/detail.html',**context)
+
+        if not year:
+            context = {
+                "car": Car(),
+                "create": True,
+                "tab_active" : "admin",
+                "alert": u"O campo ano é requerido.",
+                "status": -1
+                }
+            return render_template('admin/detail.html',**context)
+
+        if not photo:
+            context = {
+                "car": Car(),
+                "create": True,
+                "tab_active" : "admin",
+                "alert": u"O campo foto é requerido.",
+                "status": -1
+                }
+            return render_template('admin/detail.html',**context)
+
 
         if photo:
             photo_name = self.upload_file(photo)
@@ -122,9 +166,7 @@ class DetailView(MethodView):
         else:
             car = Car(model=model, year=year, photo=photo_name, manufacturer=manufacturer)
         car.save()
-        return jsonify(success=True, id= str(car.id))
-
-        #return redirect(url_for('admin.list'))
+        return redirect(url_for('admin.list'))
 
 class SearchView(MethodView):
 

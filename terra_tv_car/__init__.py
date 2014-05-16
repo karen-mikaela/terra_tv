@@ -15,7 +15,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config["USERNAME"] = "admin"
 app.config["PASSWORD"] = "admin"
-
+# MONGODB_DB
+# MONGODB_USERNAME
+# MONGODB_PASSWORD
+# MONGODB_HOST
+# MONGODB_PORT
 db = MongoEngine(app)
 
 def register_blueprints(app):

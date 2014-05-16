@@ -16,6 +16,11 @@
 <div class="row">
   <div class="col-md-6">
     <form action="." method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+      {% if status == -1 %}
+      <div class="alert alert-warning">
+        {{alert}}
+      </div>
+      {% endif %}
       <fieldset>
         <div class="form-group">
           <label class="col-md-2 col-md-offset-0 control-label"
@@ -24,6 +29,7 @@
             <input id="model" name="model"
                 class="form-control input-md"
                 type="text" maxlength="100"
+                required
                 value = {% if not create %} "{{car.model}}" {% endif %} >
           </div>
         </div>
@@ -35,6 +41,7 @@
             <input id="manufacturer" name="manufacturer"
                 class="form-control input-md"
                 type="text" maxlength="100"
+                required
                 value = {% if not create %} "{{car.manufacturer}}" {% endif %} >
           </div>
         </div>
@@ -46,6 +53,7 @@
             <input id="year" name="year"
                 class="form-control input-md"
                 type="text" maxlength="4"
+                required
                 value = {% if not create %} "{{car.year}}" {% endif %} >
           </div>
         </div>
@@ -56,6 +64,7 @@
           <div class="col-md-6">
             <input id="photo" name="photo"
                 class="form-control input-md"
+                required
                 type="file">
           </div>
         </div>
@@ -65,7 +74,7 @@
           <span class="col-md-2 col-md-offset-0 "></span>
           <div class="col-md-4">
             <button id="save" name="save" class="btn btn-primary"
-                    type="text">Salvar</button>
+                    type="submit">Salvar</button>
             {% if create %}
             <button id="reset" name="reset"
                 class="btn btn-info" type="reset">Limpar</button>

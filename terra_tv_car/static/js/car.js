@@ -14,3 +14,7 @@ $("#save").click(function(){
 
   });
 });
+
+$("#reset").click(function(){
+    $(".alert").remove();
+});

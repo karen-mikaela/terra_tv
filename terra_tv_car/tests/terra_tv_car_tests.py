@@ -78,7 +78,7 @@ class TerraTestCase(unittest.TestCase):
     def test_list_cars_without_login(self):
         response = self.app.get("/admin/", follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Novo Carro' in response.data)
+        self.assertFalse('Lista Carro' in response.data)
 
 
     def test_list_cars_with_login(self):
@@ -88,7 +88,7 @@ class TerraTestCase(unittest.TestCase):
         response = self.app.get("/admin/", follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         #show car list
-        self.assertTrue('Novo Carro' in response.data)
+        self.assertTrue('Lista Carro' in response.data)
 
 
     def test_create_new_car(self):
@@ -103,21 +103,14 @@ class TerraTestCase(unittest.TestCase):
         response = self.create_new_car(new_car)
         self.assertEqual(response.status_code, 200)
         #show car list
-        self.assertTrue('Novo Carro' in response.data)
+        self.assertTrue('Lista Carro' in response.data)
 
-    def test_delete_new_car(self):
+    def test_delete_car_doesnt_exist(self):
         response = self.login(app.config['USERNAME'],app.config['PASSWORD'])
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Olá admin' in response.data)
-        new_car = {
-            'model':"my_model",
-            'year':"2014",
-            'manufacturer':"my_manufacturer"
-        }
-        response = self.create_new_car(new_car)
-        self.assertEqual(response.status_code, 200)
-        #show car list
-        self.assertTrue('Novo Carro' in response.data)
+        response = self.app.get("/admin/delete/53759235dc0b7d696f309bbc/",follow_redirects=True)
+        self.assertEqual(response.status_code, 404)
 
 
 

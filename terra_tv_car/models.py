@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 from flask import url_for
 from terra_tv_car import db
