@@ -13,12 +13,11 @@ class TerraTestCase(unittest.TestCase):
 
     def setUp(self):
         """Before each test, set up a blank database"""
-        app.config["MONGODB_SETTINGS"] = {'DB': "terra_car"}
+        app.config["MONGODB_SETTINGS"] = {'DB': "terra_car_test"}
         app.config['TESTING'] = True
         app.config["USERNAME"] = "admin"
         app.config["PASSWORD"] = "admin"
         self.app = app.test_client()
-
 
     def login(self, username, password):
         data = {
@@ -105,6 +104,7 @@ class TerraTestCase(unittest.TestCase):
         #show car list
         self.assertTrue('Lista Carro' in response.data)
 
+
     def test_delete_car_doesnt_exist(self):
         response = self.login(app.config['USERNAME'],app.config['PASSWORD'])
         self.assertEqual(response.status_code, 200)
@@ -112,6 +112,13 @@ class TerraTestCase(unittest.TestCase):
         response = self.app.get("/admin/delete/53759235dc0b7d696f309bbc/",follow_redirects=True)
         self.assertEqual(response.status_code, 404)
 
+
+    def test_edit_car_doesnt_exist(self):
+        response = self.login(app.config['USERNAME'],app.config['PASSWORD'])
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('Olá admin' in response.data)
+        response = self.app.get("/admin/car/53759235dc0b7d696f309bbc/",follow_redirects=True)
+        self.assertEqual(response.status_code, 404)
 
 
 

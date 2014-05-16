@@ -16,6 +16,9 @@ admin = Blueprint('admin', __name__, template_folder='templates')
 def uploaded_file_name(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+def delete_all_cars():
+    pass
+
 class AuthView(MethodView):
 
     def post(self, _session):

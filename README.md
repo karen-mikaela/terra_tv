@@ -23,6 +23,7 @@ Todos
 * Resize photos
 * improving login
 * improving validate form
+* Activate the testing config to use another db.
 
 
 References
