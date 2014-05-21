@@ -110,46 +110,34 @@ class DetailView(MethodView):
         manufacturer = request.form['manufacturer']
         photo = request.files['photo']
 
-        if not model:
+        if(not model or not manufacturer or not year or (not id and not photo)):
+            fields_required = []
+
+            if not model:
+                fields_required.append("Modelo")
+
+            if not manufacturer:
+                fields_required.append("Fabricante")
+
+            if not year:
+                fields_required.append("Ano")
+
+            if not photo and not id:
+                fields_required.append("Foto")
+
+            if(len(fields_required) > 1):
+                alert = u"Os campos " + ", ".join(fields_required)+ u" são obrigatórios."
+            else:
+                alert = u"O campo " + fields_required[0] + u" é obrigatório."
+
             context = {
-                "car": Car(),
-                "create": True,
+                "car": Car(model=model, year=year, photo=photo, manufacturer=manufacturer),
+                "create": id is None,
                 "tab_active" : "admin",
-                "alert": u"O campo modelo é requerido.",
+                "alert": alert,
                 "status": -1
                 }
             return render_template('admin/detail.html',**context)
-
-        if not manufacturer:
-            context = {
-                "car": Car(),
-                "create": True,
-                "tab_active" : "admin",
-                "alert": u"O campo fabricante é requerido.",
-                "status": -1
-                }
-            return render_template('admin/detail.html',**context)
-
-        if not year:
-            context = {
-                "car": Car(),
-                "create": True,
-                "tab_active" : "admin",
-                "alert": u"O campo ano é requerido.",
-                "status": -1
-                }
-            return render_template('admin/detail.html',**context)
-
-        if not photo and not id:
-            context = {
-                "car": Car(),
-                "create": True,
-                "tab_active" : "admin",
-                "alert": u"O campo foto é requerido.",
-                "status": -1
-                }
-            return render_template('admin/detail.html',**context)
-
 
         if photo:
             photo_name = self.upload_file(photo)

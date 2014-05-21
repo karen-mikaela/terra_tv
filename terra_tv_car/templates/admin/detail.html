@@ -29,8 +29,8 @@
             <input id="model" name="model"
                 class="form-control input-md"
                 type="text" maxlength="100"
-                required
-                value = {% if not create %} "{{car.model}}" {% endif %} >
+
+                value = {% if not create or (status == -1) %} "{{car.model}}" {% endif %} >
           </div>
         </div>
 
@@ -41,8 +41,8 @@
             <input id="manufacturer" name="manufacturer"
                 class="form-control input-md"
                 type="text" maxlength="100"
-                required
-                value = {% if not create %} "{{car.manufacturer}}" {% endif %} >
+
+                value = {% if not create or (status == -1)  %} "{{car.manufacturer}}" {% endif %} >
           </div>
         </div>
 
@@ -53,8 +53,8 @@
             <input id="year" name="year"
                 class="form-control input-md"
                 type="text" maxlength="4"
-                required
-                value = {% if not create %} "{{car.year}}" {% endif %} >
+
+                value = {% if not create or (status == -1) %} "{{car.year}}" {% endif %} >
           </div>
         </div>
 
@@ -64,9 +64,6 @@
           <div class="col-md-6">
             <input id="photo" name="photo"
                 class="form-control input-md"
-                {% if create %}
-                required
-                {% endif %}
                 type="file">
           </div>
         </div>
@@ -89,7 +86,7 @@
       </fieldset>
     </form>
   </div>
-  {% if not create %}
+  {% if not create and car.photo %}
   <div class="col-md-6">
     <img height ="500"  class="photo-car" alt="{{car.photo}}"
         src="{{ car.get_photo_url() }}" />
